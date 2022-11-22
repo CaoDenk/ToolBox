@@ -1,0 +1,46 @@
+﻿<Window x:Class="UtilsBox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UtilsBox"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Icon="/gongjuxiang.png">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+    
+
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        <!--<TextBlock Grid.Column="0" />-->
+
+        <Button Grid.Column="0" Click="ShowConvertWindow"  Margin="3">
+            <!--<Image Source=""/>-->
+            <StackPanel >
+                <Image Source="/Resources/转换.png" Height="80" />
+                <TextBlock  HorizontalAlignment="Center" FontSize="14" >‘/’转成 ‘\’</TextBlock>
+            </StackPanel>
+        </Button>
+
+
+        <Button Grid.Column="1"   Margin="3">
+            <!--<Image Source=""/>-->
+            <StackPanel >
+                <Image Source="/Resources/加号.png" Height="80" />
+                <TextBlock  HorizontalAlignment="Center" FontSize="14" >添加</TextBlock>
+            </StackPanel>
+        </Button>
+    </Grid>
+
+</Window>
