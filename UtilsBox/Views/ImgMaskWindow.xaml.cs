@@ -14,9 +14,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UtilsBox.ColorLayer;
 using Path = System.IO.Path;
 using Window = System.Windows.Window;
-using Microsoft.Win32;
 namespace UtilsBox.Views
 {
     /// <summary>
@@ -26,15 +26,16 @@ namespace UtilsBox.Views
     {
         Mat _Mat { get; set; }
         Mat _Mask { get; set; }
-        List<string> masks;
+    
         string OrignImg;
         Mat ShowMat;
         const float alpha = 0.7f;
         const float beta = 0.3f;
         Vec4b v = new Vec4b(0, 255, 255, 100);
-        HashSet<string> layerSet = new HashSet<string>();
 
-        List<string> maskedLayer = new List<string>();
+        HashSet<string> layerSet = new HashSet<string>();
+        //List<(string,Vec4b)> maskedLayer = new List<(string, Vec4b)>();
+        Dictionary<string,Vec4b> maskedLayer = new Dictionary<string, Vec4b>();
         List<string> unmaskedLayer = new List<string>();
         string dir = "E:\\Dataset\\ImageMatching\\dataset\\mesad-real\\mesad-real\\train\\out\\real1_frame_490";
         public ImgMaskWindow()
@@ -62,8 +63,8 @@ namespace UtilsBox.Views
 
                 ShowMat = Cv2.ImRead(OrignImg, ImreadModes.Unchanged);
                 Cv2.CvtColor(ShowMat, ShowMat, ColorConversionCodes.BGR2BGRA);
+                ShowMask(ShowMat);
             }
-
 
 
         }
@@ -71,57 +72,24 @@ namespace UtilsBox.Views
         void ListMask()
         {
 
-
-
             var files = Directory.GetFiles(dir);
 
-            CheckBoxStack.Children.Clear();
-            masks = new List<string>();
-
+            //CheckBoxStack.Children.Clear();
+            unmaskedLayer = new List<string>();
+            maskedLayer.Clear();
             foreach (var file in files)
             {
                 if (file.EndsWith(".png"))
                 {
-
-                    string filename = Path.GetFileNameWithoutExtension(file);
-                    masks.Add(filename);
+                    unmaskedLayer.Add(Path.GetFileName(file));
                 }
 
             }
-            masks = masks.OrderBy(f => int.Parse(f)).ToList();
-            foreach (var mask in masks)
-            {
-                CheckBox c = new CheckBox();
-                c.Content = mask;
 
-                c.Checked += AddMaskOp;
-                c.Unchecked += RemoveMaskOp;
-                CheckBoxStack.Children.Add(c);
-
-            }
 
 
 
         }
-        private void ChooseDirectory(object sender, RoutedEventArgs e)
-        {
-
-
-            //var dialog = new CommonOpenFileDialog();
-            //dialog.IsFolderPicker = true;
-            //CommonFileDialogResult result = dialog.ShowDialog();
-            //if (result == CommonFileDialogResult.Ok)
-            //{
-            //    dir = dialog.FileName;
-            //}
-            ListMask();
-        }
-
-
-
-
-
-
 
 
         void AddMaskOp(object sender, RoutedEventArgs e)
@@ -129,8 +97,9 @@ namespace UtilsBox.Views
 
 
             CheckBox c = (CheckBox)sender;
-            Mat layer = OpenMask((string)c.Content);
-            AddMask(layer);
+            string layerName = (string)c.Content;
+            Mat layer = OpenMask(layerName);
+            AddMask(layerName,layer,BRGAColorMask.GetRandMask());
             ShowMask(ShowMat);
         }
 
@@ -139,8 +108,9 @@ namespace UtilsBox.Views
 
 
             CheckBox c = (CheckBox)sender;
-            Mat layer = OpenMask((string)c.Content);
-            RemoveMask(layer);
+            string layerName = (string)c.Content;
+            Mat layer = OpenMask(layerName);
+            RemoveMask(layerName, layer);
             ShowMask(ShowMat);
         }
 
@@ -151,7 +121,7 @@ namespace UtilsBox.Views
         Mat OpenMask(string fileName)
         {
 
-            string file = $@"{dir}\{fileName}.png";
+            string file = $@"{dir}\{fileName}";
 
             return Cv2.ImRead(file, ImreadModes.Unchanged);
         }
@@ -173,32 +143,53 @@ namespace UtilsBox.Views
             System.Windows.Point point = e.GetPosition(img);
             int x = (int)point.X;
             int y = (int)point.Y;
-            FindMask(y, x);
-
+            FindInUnmask(y, x);
             ShowMask(ShowMat);
 
         }
+        private void Mask_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image img = (Image)(sender);
+            System.Windows.Point point = e.GetPosition(img);
+            int x = (int)point.X;
+            int y = (int)point.Y;
+            FindInMask(y, x);
+            ShowMask(ShowMat);
 
-        void FindMask(int x, int y)
+        }
+        void FindInUnmask(int x, int y)
         {
 
-            foreach (var str in masks)
+            foreach (var str in unmaskedLayer)
             {
 
                 Mat mat = OpenMask(str);
-
                 if (mat.Get<byte>(x, y) != 0)
                 {
-                    AddMask(mat);
+                   AddMask(str,mat,BRGAColorMask.GetRandMask());      
+                   break;
                 }
-
-
-
             }
-
-
         }
-        void AddMask(Mat layer)
+
+        void FindInMask(int x, int y)
+        {
+
+            foreach (var str in maskedLayer.Keys)
+            {
+
+                Mat mat = OpenMask(str);
+                if (mat.Get<byte>(x, y) != 0)
+                {
+                    RemoveMask(str, mat );
+
+                    break;
+                }
+            }
+        }
+
+
+        void AddMask(string layerName,Mat layer,Vec4b v)
         {
 
 
@@ -220,11 +211,15 @@ namespace UtilsBox.Views
                     }
                 }
             }
-
+            unmaskedLayer.Remove(layerName);
+            maskedLayer.Add(layerName, v);
 
         }
-        void RemoveMask(Mat layer)
+        void RemoveMask(string layerName,Mat layer)
         {
+
+
+            Vec4b v= maskedLayer[layerName];
             for (int i = 0; i < layer.Rows; ++i)
             {
                 for (int j = 0; j < layer.Cols; ++j)
@@ -242,7 +237,10 @@ namespace UtilsBox.Views
                     }
                 }
             }
+            maskedLayer.Remove(layerName);
+            unmaskedLayer.Add(layerName);
         }
+
 
     }
 }

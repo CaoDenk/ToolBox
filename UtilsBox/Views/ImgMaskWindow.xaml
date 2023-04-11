@@ -5,25 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UtilsBox.Views"
         mc:Ignorable="d"
-        Title="ImgMaskWindow" Height="450" Width="1200">
+       
+        Title="ImgMaskWindow" Height="800" Width="1600">
     <StackPanel>
+        <Button Margin="2" Click="OpenImg">打开图片</Button>
         <WrapPanel>
+
             <!--<Grid Width="500">
              
             </Grid>-->
             <Image x:Name="Img" HorizontalAlignment="Left" Height="500" VerticalAlignment="Top" Width="400" />
-            <StackPanel x:Name="CheckBoxStack" Width="100">
-                <!--<CheckBox>复选框</CheckBox>
-            <CheckBox>复选框</CheckBox>-->
 
-            </StackPanel>
-            <StackPanel x:Name="MaskOperation" >
-                <Button Click="OpenImg" Margin="10">打开图片</Button>
-                <Button Click="ChooseDirectory" Margin="10">打开mask文件夹</Button>
-                <!--<Button Click="MaskOp">mask</Button>-->
-            </StackPanel>
+
+            <Image x:Name="Mask" HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="400" MouseLeftButtonDown="Mask_MouseLeftButtonDown"  MouseRightButtonDown="Mask_MouseRightButtonDown"/>
+
         </WrapPanel>
-        <Image x:Name="Mask" HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="400" MouseLeftButtonDown="Mask_MouseLeftButtonDown" />
-        <!--<Rectangle Width="200" Height="200"  Fill="AliceBlue"  MouseLeftButtonDown="Rectangle_MouseLeftButtonDown"/>-->
     </StackPanel>
+
 </Window>

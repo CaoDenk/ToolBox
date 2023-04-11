@@ -119,6 +119,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ColorLayer\RGBAColorMask.cs" />
     <Compile Include="Views\ConvertWindow.xaml.cs">
       <DependentUpon>ConvertWindow.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
