@@ -22,6 +22,7 @@ namespace UtilsBox
     public partial class MainWindow : Window
     {
         ConvertWindow convertWindow;
+        ImgMaskWindow imgMaskWindow;
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +51,26 @@ namespace UtilsBox
             
         }
 
-   
+        private void ShowImgMaskWindow(object sender, RoutedEventArgs e)
+        {
+            if (imgMaskWindow == null)
+            {
+                imgMaskWindow = new ImgMaskWindow();
+
+
+                imgMaskWindow.Closing += (_s, _e) =>
+                {
+                    imgMaskWindow = null;
+                };
+
+                imgMaskWindow.Show();
+
+
+            }
+            else
+            {
+                imgMaskWindow.Activate();
+            }
+        }
     }
 }

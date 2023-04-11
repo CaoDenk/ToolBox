@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UtilsBox"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Icon="/gongjuxiang.png">
+        Title="MainWindow" Height="450" Width="800" Icon="/Resources/gongjuxiang.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -32,9 +32,15 @@
                 <TextBlock  HorizontalAlignment="Center" FontSize="14" >‘/’转成 ‘\’</TextBlock>
             </StackPanel>
         </Button>
+        <Button Grid.Column="1"   Margin="3" Click="ShowImgMaskWindow" >
+            <!--<Image Source=""/>-->
+            <StackPanel >
+                <!--<Image Source="/Resources/加号.png" Height="80" />-->
+                <TextBlock  HorizontalAlignment="Center" FontSize="14" >SAM</TextBlock>
+            </StackPanel>
+        </Button>
 
-
-        <Button Grid.Column="1"   Margin="3">
+        <Button Grid.Column="2"   Margin="3">
             <!--<Image Source=""/>-->
             <StackPanel >
                 <Image Source="/Resources/加号.png" Height="80" />
