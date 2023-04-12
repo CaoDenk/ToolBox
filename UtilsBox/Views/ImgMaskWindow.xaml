@@ -8,7 +8,11 @@
        
         Title="ImgMaskWindow" Height="800" Width="1600">
     <StackPanel>
-        <Button Margin="2" Click="OpenImg">打开图片</Button>
+        <WrapPanel>
+            <Button Margin="2" Click="OpenImg">打开图片</Button>
+            <Button Margin="2" Click="SaveImg">保存图片</Button>
+        </WrapPanel>
+       
         <WrapPanel>
 
             <!--<Grid Width="500">

@@ -159,7 +159,7 @@ namespace UtilsBox.Views
         }
         void FindInUnmask(int x, int y)
         {
-
+ 
             foreach (var str in unmaskedLayer)
             {
 
@@ -240,7 +240,26 @@ namespace UtilsBox.Views
             maskedLayer.Remove(layerName);
             unmaskedLayer.Add(layerName);
         }
+        private void SaveImg(object sender, RoutedEventArgs e)
+        {
+            Mat mat = null;
+            foreach (string s in maskedLayer.Keys)
+            {
+                var m=OpenMask(s);
+                if(mat==null)
+                {
+                    mat = m;
+                }else
+                {
+                    Cv2.BitwiseOr(mat, m,mat);
+                }
+                //mat.BitwiseOr()
 
+            }
+            string fileName = Path.GetFileName(OrignImg);
+            mat.SaveImage($@"E:\Dataset\Img_seg\make_dataset\mask\{fileName}");
+
+        }
 
     }
 }
