@@ -11,6 +11,9 @@
         <WrapPanel>
             <Button Margin="2" Click="OpenImg">打开图片</Button>
             <Button Margin="2" Click="SaveImg">保存图片</Button>
+            <Button Margin="2" >截取图片</Button>
+            <Button Margin="2" >二值化</Button>
+            
         </WrapPanel>
        
         <WrapPanel>

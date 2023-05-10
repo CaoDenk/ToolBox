@@ -36,7 +36,7 @@
             <!--<Image Source=""/>-->
             <StackPanel >
                 <!--<Image Source="/Resources/加号.png" Height="80" />-->
-                <TextBlock  HorizontalAlignment="Center" FontSize="14" >SAM</TextBlock>
+                <TextBlock  HorizontalAlignment="Center" FontSize="14" >图 片 处 理</TextBlock>
             </StackPanel>
         </Button>
 

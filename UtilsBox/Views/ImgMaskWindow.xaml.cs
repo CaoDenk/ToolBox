@@ -31,7 +31,6 @@ namespace UtilsBox.Views
         Mat ShowMat;
         const float alpha = 0.7f;
         const float beta = 0.3f;
-        Vec4b v = new Vec4b(0, 255, 255, 100);
 
         HashSet<string> layerSet = new HashSet<string>();
         //List<(string,Vec4b)> maskedLayer = new List<(string, Vec4b)>();
@@ -48,7 +47,7 @@ namespace UtilsBox.Views
         {
 
             var dialog = new OpenFileDialog();
-            dialog.InitialDirectory = @"E:\Dataset\ImageMatching\dataset\mesad-real\mesad-real\train\images";
+            dialog.InitialDirectory = @"E:\Dataset\Img_seg\make_dataset\mesad-real\mesad-real\train\images";
             var result = dialog.ShowDialog();
             if (result.HasValue && (bool)result)
             {
@@ -58,7 +57,7 @@ namespace UtilsBox.Views
                 Img.Source = t;
                 Img.Height = t.Height;
                 Img.Width = t.Width;
-                dir = $@"E:\\Dataset\\ImageMatching\\dataset\\mesad-real\\mesad-real\\train\\out\\{Path.GetFileNameWithoutExtension(OrignImg)}";
+                dir = $@"E:\Dataset\Img_seg\make_dataset\mesad-real\mesad-real\train\out\{Path.GetFileNameWithoutExtension(OrignImg)}";
                 ListMask();
 
                 ShowMat = Cv2.ImRead(OrignImg, ImreadModes.Unchanged);
@@ -73,8 +72,6 @@ namespace UtilsBox.Views
         {
 
             var files = Directory.GetFiles(dir);
-
-            //CheckBoxStack.Children.Clear();
             unmaskedLayer = new List<string>();
             maskedLayer.Clear();
             foreach (var file in files)
@@ -85,9 +82,6 @@ namespace UtilsBox.Views
                 }
 
             }
-
-
-
 
         }
 
@@ -122,7 +116,6 @@ namespace UtilsBox.Views
         {
 
             string file = $@"{dir}\{fileName}";
-
             return Cv2.ImRead(file, ImreadModes.Unchanged);
         }
         void ShowMask(Mat mat)
@@ -199,7 +192,6 @@ namespace UtilsBox.Views
                 {
                     if (layer.Get<byte>(i, j) != 0)
                     {
-                        //mask.Set<Vec4b>(i, j, new Vec4b(0, 255, 255, 100));
                         Vec4b pixel = ShowMat.Get<Vec4b>(i, j);
 
                         pixel[0] = (byte)(pixel[0] * alpha + v[0] * beta);
@@ -253,12 +245,13 @@ namespace UtilsBox.Views
                 {
                     Cv2.BitwiseOr(mat, m,mat);
                 }
-                //mat.BitwiseOr()
 
             }
             string fileName = Path.GetFileName(OrignImg);
             mat.SaveImage($@"E:\Dataset\Img_seg\make_dataset\mask\{fileName}");
 
+
+            
         }
 
     }
