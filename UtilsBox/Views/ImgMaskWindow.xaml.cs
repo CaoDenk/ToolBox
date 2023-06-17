@@ -36,7 +36,10 @@ namespace UtilsBox.Views
         //List<(string,Vec4b)> maskedLayer = new List<(string, Vec4b)>();
         Dictionary<string,Vec4b> maskedLayer = new Dictionary<string, Vec4b>();
         List<string> unmaskedLayer = new List<string>();
+
+        string initialDirectory = @"E:\Dataset\Img_seg\make_dataset\mesad-real\mesad-real\train\images";
         string dir = "E:\\Dataset\\ImageMatching\\dataset\\mesad-real\\mesad-real\\train\\out\\real1_frame_490";
+        string outdir = @"E:\\Dataset\\Img_seg\\make_dataset\\mesad-real\\mesad-real\\train\\out";
         public ImgMaskWindow()
         {
             InitializeComponent();
@@ -47,7 +50,7 @@ namespace UtilsBox.Views
         {
 
             var dialog = new OpenFileDialog();
-            dialog.InitialDirectory = @"E:\Dataset\Img_seg\make_dataset\mesad-real\mesad-real\train\images";
+            dialog.InitialDirectory = initialDirectory;
             var result = dialog.ShowDialog();
             if (result.HasValue && (bool)result)
             {
@@ -57,7 +60,7 @@ namespace UtilsBox.Views
                 Img.Source = t;
                 Img.Height = t.Height;
                 Img.Width = t.Width;
-                dir = $@"E:\Dataset\Img_seg\make_dataset\mesad-real\mesad-real\train\out\{Path.GetFileNameWithoutExtension(OrignImg)}";
+                dir = $@"{outdir}\{Path.GetFileNameWithoutExtension(OrignImg)}";
                 ListMask();
 
                 ShowMat = Cv2.ImRead(OrignImg, ImreadModes.Unchanged);

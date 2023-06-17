@@ -38,8 +38,8 @@ namespace UtilsBox.Views
                     stringBuilder.Append(c);
             }
             Result.Text = stringBuilder.ToString();
-            Display.Text = "转换结果已经保存在截切版里";
             Clipboard.SetText(Result.Text);
+            Display.Text = "转换结果已经保存在截切版里";
         }
         private void Clear(object sender, RoutedEventArgs e)
         {
@@ -48,12 +48,22 @@ namespace UtilsBox.Views
             Display.Text = "";
         }
 
+        private void LowerToUpper(object sender, RoutedEventArgs e)
+        {
+            string v = Input.Text;
+            //MessageBox.Show(v);
+     
+            Result.Text = v.ToUpper();         
+            Clipboard.SetText(Result.Text);
+            Display.Text = "转换结果已经保存在截切版里";
+        }
+
         //protected override void OnClosed(EventArgs e)
         //{
 
         //    base.OnClosed(e);
 
         //}
-      
+
     }
 }

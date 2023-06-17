@@ -29,7 +29,7 @@
             <!--<Image Source=""/>-->
             <StackPanel >
                 <Image Source="/Resources/转换.png" Height="80" />
-                <TextBlock  HorizontalAlignment="Center" FontSize="14" >‘/’转成 ‘\’</TextBlock>
+                <TextBlock  HorizontalAlignment="Center" FontSize="14" >文本处理</TextBlock>
             </StackPanel>
         </Button>
         <Button Grid.Column="1"   Margin="3" Click="ShowImgMaskWindow" >
