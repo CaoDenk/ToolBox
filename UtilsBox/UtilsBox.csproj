@@ -120,6 +120,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ColorLayer\RGBAColorMask.cs" />
+    <Compile Include="Handle\ParseMatrix.cs" />
+    <Compile Include="Views\ConvertArrayWindow.xaml.cs">
+      <DependentUpon>ConvertArrayWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConvertWindow.xaml.cs">
       <DependentUpon>ConvertWindow.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -139,6 +143,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ConvertArrayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ConvertWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

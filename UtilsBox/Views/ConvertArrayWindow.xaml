@@ -1,0 +1,28 @@
+﻿<Window x:Class="UtilsBox.Views.ConvertArrayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UtilsBox.Views"
+        mc:Ignorable="d"
+        Title="ConvertArrayWindow" Height="450" Width="800">
+    <StackPanel>
+        
+        <TextBox AcceptsReturn="True" MinHeight="80" x:Name="Input" Margin="0,5,0,0"/>
+        <TextBox AcceptsReturn="True" MinHeight="80" x:Name="Result" Margin="0,5,0,0" />
+        <StackPanel>
+            <WrapPanel>
+                <TextBlock Margin="5,0,20,0" VerticalAlignment="Center">变量名称</TextBlock>
+                <TextBox x:Name="VariableName"  Height="30"  Width="80" />
+            </WrapPanel>
+           
+            <WrapPanel Margin="2" Height="40">
+
+                <Button Click="ConvertCSharp"  Margin="2" Height="30" Width="100">转二维数组</Button>
+                <Button   Margin="10,0,0,0" Height="30" Width="100">清除</Button>
+            </WrapPanel>
+            <TextBlock x:Name="Display"  HorizontalAlignment="Center"/>
+        </StackPanel>
+     
+    </StackPanel>
+</Window>

@@ -23,6 +23,7 @@ namespace UtilsBox
     {
         ConvertWindow convertWindow;
         ImgMaskWindow imgMaskWindow;
+        ConvertArrayWindow convertArrayWindow;
         public MainWindow()
         {
             InitializeComponent();
@@ -70,6 +71,26 @@ namespace UtilsBox
             else
             {
                 imgMaskWindow.Activate();
+            }
+        }
+
+        private void ConvertArray(object sender, RoutedEventArgs e)
+        {
+            if (convertArrayWindow == null)
+            {
+                convertArrayWindow = new ConvertArrayWindow();
+
+
+                convertArrayWindow.Closing += (_s, _e) =>
+                {
+                    convertArrayWindow = null;
+                };
+
+                convertArrayWindow.Show();
+            }
+            else
+            {
+                convertArrayWindow.Activate();
             }
         }
     }

@@ -40,11 +40,11 @@
             </StackPanel>
         </Button>
 
-        <Button Grid.Column="2"   Margin="3">
+        <Button Grid.Column="2"   Margin="3" Click="ConvertArray">
             <!--<Image Source=""/>-->
             <StackPanel >
                 <Image Source="/Resources/加号.png" Height="80" />
-                <TextBlock  HorizontalAlignment="Center" FontSize="14" >添加</TextBlock>
+                <TextBlock  HorizontalAlignment="Center" FontSize="14" >数组转换</TextBlock>
             </StackPanel>
         </Button>
     </Grid>

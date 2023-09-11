@@ -19,6 +19,7 @@ namespace UtilsBox.Views
     /// </summary>
     public partial class ConvertWindow : Window
     {
+        bool b = false;
         public ConvertWindow()
         {
             InitializeComponent();
@@ -51,10 +52,21 @@ namespace UtilsBox.Views
         private void LowerToUpper(object sender, RoutedEventArgs e)
         {
             string v = Input.Text;
-            //MessageBox.Show(v);
-     
-            Result.Text = v.ToUpper();         
-            Clipboard.SetText(Result.Text);
+            Button button = sender as Button;
+            string cv;
+            if (b)
+            {
+               cv=v.ToUpper();
+                button.Content = "大写转小写";
+            }else
+            {
+                cv=v.ToLower();
+                button.Content = "小写转大写";
+
+            }
+            Result.Text = cv;  
+            b = !b;
+            Clipboard.SetText(cv);
             Display.Text = "转换结果已经保存在截切版里";
         }
 
