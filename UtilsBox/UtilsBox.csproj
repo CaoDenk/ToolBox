@@ -128,6 +128,9 @@
       <DependentUpon>ConvertWindow.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Views\FileEqualWindow.xaml.cs">
+      <DependentUpon>FileEqualWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ImgMaskWindow.xaml.cs">
       <DependentUpon>ImgMaskWindow.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\FileEqualWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ImgMaskWindow.xaml">
       <SubType>Designer</SubType>

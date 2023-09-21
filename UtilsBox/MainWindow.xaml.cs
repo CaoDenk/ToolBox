@@ -93,5 +93,13 @@ namespace UtilsBox
                 convertArrayWindow.Activate();
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            FileEqual equal = new FileEqual();
+            equal.Show();
+
+        }
     }
 }
