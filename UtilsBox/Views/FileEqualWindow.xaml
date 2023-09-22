@@ -11,14 +11,16 @@
 
             <StackPanel>
                 <TextBlock x:Name="f1"/>
-                <Button Click="Button_Click" Content="选中第一个文件"/>
+                <Button Click="OpenFile1" Content="选中第一个文件"/>
             </StackPanel>
             <StackPanel>
                 <TextBlock x:Name="f2"/>
-                <Button Click="Button_Click_1" Content="选中第二个文件"/>
+            <Button Click="OpenFile2" Content="选中第二个文件"/>
             </StackPanel>
 
-      
-        <Button Click="Button_Click_2" Content="比较"/>
+
+        <Button Click="CompareByMd5" Content="md5比较"/>
+        <Button Click="CompareBySha256" Content="sha256比较"/>
+        <Button Click="CompareByAllBytes" Content="所有字节比较"/>
     </StackPanel>
 </Window>

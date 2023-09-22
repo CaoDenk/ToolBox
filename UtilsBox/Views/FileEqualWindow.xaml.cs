@@ -29,7 +29,7 @@ namespace UtilsBox.Views
         }
         string file1;
         string file2;
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void OpenFile1(object sender, RoutedEventArgs e)
         {
             FileDialog dialog=new OpenFileDialog();
             bool? b=dialog.ShowDialog();
@@ -41,7 +41,7 @@ namespace UtilsBox.Views
            
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void OpenFile2(object sender, RoutedEventArgs e)
         {
             FileDialog dialog = new OpenFileDialog();
             bool? b = dialog.ShowDialog();
@@ -51,8 +51,12 @@ namespace UtilsBox.Views
                 f2.Text = file2;
             }
         }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 通过比较md5，判断文件是否相同
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CompareByMd5(object sender, RoutedEventArgs e)
         {
             using (var md5 = MD5.Create())
             {
@@ -78,6 +82,42 @@ namespace UtilsBox.Views
             }
 
 
+
+        }
+        /// <summary>
+        /// 通过比较md5，判断文件是否相同
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CompareBySha256(object sender, RoutedEventArgs e)
+        {
+            using (var sha256File1 = SHA256.Create())
+            {
+                using (var stream1 = File.OpenRead(file1))
+                {
+                    byte[] hash1 = sha256File1.ComputeHash(stream1);
+
+                    using (var stream2= File.OpenRead(file2))
+                    {
+                        byte[] hash2 = sha256File1.ComputeHash(stream2);
+
+                        if (Enumerable.SequenceEqual(hash1, hash2))
+                        {
+                            MessageBox.Show("true");
+                        }
+                        else
+                        {
+                            MessageBox.Show("false");
+                        }
+
+                    }
+
+                }
+            }
+
+        }
+        private void CompareByAllBytes(object sender, RoutedEventArgs e)
+        {
 
         }
     }
