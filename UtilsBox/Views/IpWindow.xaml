@@ -6,27 +6,52 @@
         xmlns:local="clr-namespace:UtilsBox.Views"
         mc:Ignorable="d"
         Title="IpWindow" Height="450" Width="800">
-    <WrapPanel>
-        <StackPanel>
-            <WrapPanel Margin="5">
-                <TextBlock Width="60">ip:</TextBlock>
-                <TextBox  Width="200"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="*"  />
+            <ColumnDefinition  Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <WrapPanel  Margin="5,5,0,0">
+                <TextBlock Width="100" >输入Ip:</TextBlock>
+                <TextBox Width="200" x:Name="Ip1"/>
             </WrapPanel>
-            <WrapPanel Margin="5">
-                <TextBlock Width="60">mask:</TextBlock>
-                <TextBox  Width="200"/>
+            <WrapPanel  Margin="5,5,0,0">
+                <TextBlock Width="100">输入子网掩码:</TextBlock>
+                <TextBox Width="200" x:Name="SubMask1"/>
+            </WrapPanel>
+  
+            <Button Click="Button_Click" Width="80" HorizontalAlignment="Center" Margin="5">计算</Button>
+            <WrapPanel  Margin="5,5,0,0">
+                <TextBlock Width="100">bitwise and:</TextBlock>
+                <TextBlock Width="200" x:Name="Result1"/>
             </WrapPanel>
         </StackPanel>
-        <StackPanel>
-            <WrapPanel Margin="5">
-                <TextBlock Width="60"><Run Text="ip:"/></TextBlock>
-                <TextBox  Width="200"/>
+
+        <StackPanel Grid.Column="1">
+            <WrapPanel  Margin="5,5,0,0">
+                <TextBlock Width="100">输入Ip:</TextBlock>
+                <TextBox Width="200" x:Name="Ip2"/>
             </WrapPanel>
-            <WrapPanel Margin="5">
-                <TextBlock Width="60"><Run Text="mask:"/></TextBlock>
-                <TextBox  Width="200"/>
+            <WrapPanel  Margin="5,5,0,0">
+                <TextBlock Width="100">输入子网掩码:</TextBlock>
+                <TextBox Width="200" x:Name="SubMask2"/>
+            </WrapPanel>
+
+            <Button Click="Button_Click_1" Width="80" HorizontalAlignment="Center" Margin="5">计算</Button>
+            <WrapPanel  Margin="5,5,0,0">
+                <TextBlock Width="100">bitwise and:</TextBlock>
+                <TextBlock Width="200" x:Name="Result2"/>
             </WrapPanel>
         </StackPanel>
-    </WrapPanel>
-   
+
+
+
+
+    </Grid>
 </Window>

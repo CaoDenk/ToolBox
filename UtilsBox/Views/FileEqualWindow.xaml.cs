@@ -58,6 +58,20 @@ namespace UtilsBox.Views
         /// <param name="e"></param>
         private void CompareByMd5(object sender, RoutedEventArgs e)
         {
+            if(file1== null || file2 == null) return;
+            if(file1==file2)
+            {
+                MessageBox.Show("同一个文件");
+                return;
+            }
+            FileInfo fileinfo1 = new FileInfo(file1);
+            FileInfo fileinfo2 = new FileInfo(file1);
+
+            if (fileinfo1.Length != fileinfo2.Length)
+            {
+                MessageBox.Show("false");
+                return;
+            }
             using (var md5 = MD5.Create())
             {
                 using (var stream = File.OpenRead(file1))
@@ -91,6 +105,20 @@ namespace UtilsBox.Views
         /// <param name="e"></param>
         private void CompareBySha256(object sender, RoutedEventArgs e)
         {
+            if (file1 == null || file2 == null) return;
+            if (file1 == file2)
+            {
+                MessageBox.Show("同一个文件");
+                return;
+            }
+            FileInfo fileinfo1 = new FileInfo(file1);
+            FileInfo fileinfo2 = new FileInfo(file1);
+
+            if (fileinfo1.Length != fileinfo2.Length)
+            {
+                MessageBox.Show("false");
+                return;
+            }
             using (var sha256File1 = SHA256.Create())
             {
                 using (var stream1 = File.OpenRead(file1))
@@ -118,7 +146,36 @@ namespace UtilsBox.Views
         }
         private void CompareByAllBytes(object sender, RoutedEventArgs e)
         {
+            if (file1 == null || file2 == null) return;
+            if (file1 == file2)
+            {
+                MessageBox.Show("同一个文件");
+                return;
+            }
+            FileInfo fileinfo1=new FileInfo(file1);
+            FileInfo fileinfo2 =new FileInfo(file1);
+     
+            if (fileinfo1.Length != fileinfo2.Length)
+            {
+                MessageBox.Show("false");
+                return;
+            }
+            using (var stream1 = File.OpenRead(file1))
+            {
+                using (var stream2 = File.OpenRead(file2))
+                {
+                    for(long i=0;i<stream1.Length; i++)
+                    {
+                        if(stream1.ReadByte() != stream2.ReadByte())
+                        {
+                            MessageBox.Show("false");
+                            return;
+                        }    
+                    }
 
+                }
+            }
+            MessageBox.Show("true");
         }
     }
 }

@@ -16,6 +16,9 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,11 +31,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -120,6 +120,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ColorLayer\RGBAColorMask.cs" />
+    <Compile Include="Handle\IpHandler.cs" />
     <Compile Include="Handle\ParseMatrix.cs" />
     <Compile Include="Views\ConvertArrayWindow.xaml.cs">
       <DependentUpon>ConvertArrayWindow.xaml</DependentUpon>
@@ -133,6 +134,9 @@
     </Compile>
     <Compile Include="Views\ImgMaskWindow.xaml.cs">
       <DependentUpon>ImgMaskWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IpWindow.xaml.cs">
+      <DependentUpon>IpWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -160,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ImgMaskWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

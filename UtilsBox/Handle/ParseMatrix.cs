@@ -15,7 +15,7 @@ namespace UtilsBox.Handle
             int i = start;
             for (; i < s.Length; )
             {
-                if (char.IsDigit(s[i]))
+                if (char.IsDigit(s[i]) || s[i]=='-')
                 {
                     result.Add(ReadNum(s,ref i));
 

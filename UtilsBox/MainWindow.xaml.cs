@@ -94,12 +94,18 @@ namespace UtilsBox
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void FileComparer(object sender, RoutedEventArgs e)
         {
 
             FileEqual equal = new FileEqual();
             equal.Show();
 
+        }
+
+        private void IpHandle(object sender, RoutedEventArgs e)
+        {
+            IpWindow ipWindow = new IpWindow();
+            ipWindow.Show();
         }
     }
 }
