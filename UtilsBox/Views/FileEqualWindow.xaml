@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UtilsBox.Views"
         mc:Ignorable="d"
-        DataContext=""
+      
         Title="FileEqual" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,7 +14,8 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
       
 
@@ -34,10 +35,7 @@
             <Button Click="CompareBySha256" Content="sha256比较" Width="200"/>
             <Button Click="CompareByAllBytes" Content="所有字节比较" Width="200"/>
         </WrapPanel>
-         
-
-
-      
+        <ProgressBar Grid.Row="2"  Grid.ColumnSpan="2"  Value="0"   Height="40" x:Name="Process" />
     </Grid>
         
 

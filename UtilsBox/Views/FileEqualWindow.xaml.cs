@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UtilsBox.Handle;
 
 namespace UtilsBox.Views
 {
@@ -29,6 +31,7 @@ namespace UtilsBox.Views
         }
         string file1;
         string file2;
+        bool ShowBool { get;set; }
         private void OpenFile1(object sender, RoutedEventArgs e)
         {
             FileDialog dialog=new OpenFileDialog();
@@ -144,38 +147,60 @@ namespace UtilsBox.Views
             }
 
         }
-        private void CompareByAllBytes(object sender, RoutedEventArgs e)
+        private async void CompareByAllBytes(object sender, RoutedEventArgs e)
         {
-            if (file1 == null || file2 == null) return;
-            if (file1 == file2)
+            Process.Maximum = 1;
+            
+           await  Task.Run(() =>
             {
-                MessageBox.Show("同一个文件");
-                return;
-            }
-            FileInfo fileinfo1=new FileInfo(file1);
-            FileInfo fileinfo2 =new FileInfo(file1);
-     
-            if (fileinfo1.Length != fileinfo2.Length)
-            {
-                MessageBox.Show("false");
-                return;
-            }
-            using (var stream1 = File.OpenRead(file1))
-            {
-                using (var stream2 = File.OpenRead(file2))
+                if (file1 == null || file2 == null) return;
+                if (file1 == file2)
                 {
-                    for(long i=0;i<stream1.Length; i++)
-                    {
-                        if(stream1.ReadByte() != stream2.ReadByte())
-                        {
-                            MessageBox.Show("false");
-                            return;
-                        }    
-                    }
-
+                    MessageBox.Show("同一个文件");
+                    return;
                 }
-            }
-            MessageBox.Show("true");
+                FileInfo fileinfo1 = new FileInfo(file1);
+                FileInfo fileinfo2 = new FileInfo(file1);
+
+                if (fileinfo1.Length != fileinfo2.Length)
+                {
+                    MessageBox.Show("false");
+                    return;
+                }
+              
+                using (var stream1 = File.OpenRead(file1))
+                {
+                    using (var stream2 = File.OpenRead(file2))
+                    {
+                        for (long i = 0; i < stream1.Length; i++)
+                        {
+                            if (stream1.ReadByte() != stream2.ReadByte())
+                            {
+                               
+                                MessageBox.Show("false");
+                                break;
+                            }
+                            if(i%128==0) 
+                            App.Current.Dispatcher.Invoke(() =>
+                            {
+
+                                double k = i;
+                                Process.Value = k / stream1.Length;
+                                
+                            });
+                          
+                        }
+
+                    }
+                }
+
+                //App.Current.Dispatcher.Invoke(() =>
+                //{
+                //    Process.Visibility = Visibility.Hidden;
+                //});
+                MessageBox.Show("true");
+            });
+            
         }
     }
 }
