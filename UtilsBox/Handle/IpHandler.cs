@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UtilsBox.Handle
 {
@@ -32,7 +30,6 @@ namespace UtilsBox.Handle
                 int num = 1 << 31;
                 for (int i = 0; i < count; i++)
                 {
-
                     maskInt = (maskInt >> 1) | num;
                 }
                 int bitwiseResult = ipInt & maskInt;

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UtilsBox"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Icon="/Resources/gongjuxiang.png">
+        Title="MainWindow" Height="450" Width="800" Icon="Resources/gongjuxiang.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -28,7 +28,7 @@
         <Button Grid.Column="0" Click="ShowConvertWindow"  Margin="3">
             <!--<Image Source=""/>-->
             <StackPanel >
-                <Image Source="/Resources/转换.png" Height="80" />
+                <Image Source="Resources/Convert.png" Height="80" />
                 <TextBlock  HorizontalAlignment="Center" FontSize="14" >文本处理</TextBlock>
             </StackPanel>
         </Button>
@@ -43,7 +43,7 @@
         <Button Grid.Column="2"   Margin="3" Click="ConvertArray">
             <!--<Image Source=""/>-->
             <StackPanel >
-                <Image Source="/Resources/转换.png" Height="80" />
+                <Image Source="Resources/Convert.png" Height="80" />
                 <TextBlock  HorizontalAlignment="Center" FontSize="14" >数组转换</TextBlock>
             </StackPanel>
         </Button>
@@ -61,6 +61,7 @@
                 <TextBlock  HorizontalAlignment="Center" FontSize="14" >计算IP</TextBlock>
             </StackPanel>
         </Button>
+
     </Grid>
 
 </Window>

@@ -32,10 +32,9 @@ namespace UtilsBox.Views
         const float alpha = 0.7f;
         const float beta = 0.3f;
 
-        HashSet<string> layerSet = new HashSet<string>();
-        //List<(string,Vec4b)> maskedLayer = new List<(string, Vec4b)>();
-        Dictionary<string,Vec4b> maskedLayer = new Dictionary<string, Vec4b>();
-        List<string> unmaskedLayer = new List<string>();
+        //HashSet<string> layerSet = [];
+        Dictionary<string,Vec4b> maskedLayer = [];
+        List<string> unmaskedLayer = [];
 
         string initialDirectory = @"E:\Dataset\Img_seg\make_dataset\mesad-real\mesad-real\train\images";
         string dir = "E:\\Dataset\\ImageMatching\\dataset\\mesad-real\\mesad-real\\train\\out\\real1_frame_490";
@@ -48,34 +47,34 @@ namespace UtilsBox.Views
 
         void OpenImg(object sender, RoutedEventArgs e)
         {
-
-            var dialog = new OpenFileDialog();
-            dialog.InitialDirectory = initialDirectory;
+            var dialog = new OpenFileDialog
+            {
+                InitialDirectory = initialDirectory
+            };
             var result = dialog.ShowDialog();
-            if (result.HasValue && (bool)result)
+            if (result.HasValue &&result.Value)
             {
                 OrignImg = dialog.FileName;
                 var covt = new ImageSourceConverter();
-                ImageSource t = (ImageSource)covt.ConvertFromString(OrignImg);
-                Img.Source = t;
-                Img.Height = t.Height;
-                Img.Width = t.Width;
-                dir = $@"{outdir}\{Path.GetFileNameWithoutExtension(OrignImg)}";
-                ListMask();
-
-                ShowMat = Cv2.ImRead(OrignImg, ImreadModes.Unchanged);
-                Cv2.CvtColor(ShowMat, ShowMat, ColorConversionCodes.BGR2BGRA);
-                ShowMask(ShowMat);
+                if(covt.ConvertFromString(OrignImg) is ImageSource t) //可能转成功
+                {
+                    Img.Source = t;
+                    Img.Height = t.Height;
+                    Img.Width = t.Width;
+                    dir = $@"{outdir}\{Path.GetFileNameWithoutExtension(OrignImg)}";
+                    ListMask();
+                    ShowMat = Cv2.ImRead(OrignImg, ImreadModes.Unchanged);
+                    Cv2.CvtColor(ShowMat, ShowMat, ColorConversionCodes.BGR2BGRA);
+                    ShowMask(ShowMat);
+                }
+               
             }
-
-
         }
 
         void ListMask()
         {
-
             var files = Directory.GetFiles(dir);
-            unmaskedLayer = new List<string>();
+            unmaskedLayer = [];
             maskedLayer.Clear();
             foreach (var file in files)
             {
@@ -91,8 +90,6 @@ namespace UtilsBox.Views
 
         void AddMaskOp(object sender, RoutedEventArgs e)
         {
-
-
             CheckBox c = (CheckBox)sender;
             string layerName = (string)c.Content;
             Mat layer = OpenMask(layerName);
@@ -102,8 +99,6 @@ namespace UtilsBox.Views
 
         void RemoveMaskOp(object sender, RoutedEventArgs e)
         {
-
-
             CheckBox c = (CheckBox)sender;
             string layerName = (string)c.Content;
             Mat layer = OpenMask(layerName);
@@ -111,16 +106,8 @@ namespace UtilsBox.Views
             ShowMask(ShowMat);
         }
 
+        Mat OpenMask(string fileName)=> Cv2.ImRead($@"{dir}\{fileName}", ImreadModes.Unchanged);
 
-
-
-
-        Mat OpenMask(string fileName)
-        {
-
-            string file = $@"{dir}\{fileName}";
-            return Cv2.ImRead(file, ImreadModes.Unchanged);
-        }
         void ShowMask(Mat mat)
         {
             int width = mat.Width;
@@ -155,10 +142,9 @@ namespace UtilsBox.Views
         }
         void FindInUnmask(int x, int y)
         {
- 
+
             foreach (var str in unmaskedLayer)
             {
-
                 Mat mat = OpenMask(str);
                 if (mat.Get<byte>(x, y) != 0)
                 {
@@ -173,12 +159,10 @@ namespace UtilsBox.Views
 
             foreach (var str in maskedLayer.Keys)
             {
-
                 Mat mat = OpenMask(str);
                 if (mat.Get<byte>(x, y) != 0)
                 {
                     RemoveMask(str, mat );
-
                     break;
                 }
             }
@@ -187,7 +171,6 @@ namespace UtilsBox.Views
 
         void AddMask(string layerName,Mat layer,Vec4b v)
         {
-
 
             for (int i = 0; i < layer.Rows; ++i)
             {
@@ -201,7 +184,7 @@ namespace UtilsBox.Views
                         pixel[1] = (byte)(pixel[1] * alpha + v[1] * beta);
                         pixel[2] = (byte)(pixel[2] * alpha + v[2] * beta);
                         pixel[3] = (byte)(pixel[3] * alpha + v[3] * beta);
-                        ShowMat.Set<Vec4b>(i, j, pixel);
+                        ShowMat.Set(i, j, pixel);
 
                     }
                 }
@@ -212,8 +195,6 @@ namespace UtilsBox.Views
         }
         void RemoveMask(string layerName,Mat layer)
         {
-
-
             Vec4b v= maskedLayer[layerName];
             for (int i = 0; i < layer.Rows; ++i)
             {
@@ -227,8 +208,7 @@ namespace UtilsBox.Views
                         pixel[1] = (byte)((pixel[1] - v[1] * beta) / alpha);
                         pixel[2] = (byte)((pixel[2] - v[2] * beta) / alpha);
                         pixel[3] = (byte)((pixel[3] - v[3] * beta) / alpha);
-                        ShowMat.Set<Vec4b>(i, j, pixel);
-
+                        ShowMat.Set(i, j, pixel);
                     }
                 }
             }
@@ -237,7 +217,7 @@ namespace UtilsBox.Views
         }
         private void SaveImg(object sender, RoutedEventArgs e)
         {
-            Mat mat = null;
+            Mat? mat = null;
             foreach (string s in maskedLayer.Keys)
             {
                 var m=OpenMask(s);
@@ -251,10 +231,8 @@ namespace UtilsBox.Views
 
             }
             string fileName = Path.GetFileName(OrignImg);
-            mat.SaveImage($@"E:\Dataset\Img_seg\make_dataset\mask\{fileName}");
+            mat?.SaveImage($@"E:\Dataset\Img_seg\make_dataset\mask\{fileName}");
 
-
-            
         }
 
     }

@@ -25,8 +25,7 @@ namespace UtilsBox.Handle
                     ++i;
                     return result;
                 } 
-                else
-                    ++i;
+                else  ++i;
             }
             return result;
         }

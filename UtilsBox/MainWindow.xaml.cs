@@ -34,15 +34,11 @@ namespace UtilsBox
             if(convertWindow == null)
             {
                 convertWindow = new ConvertWindow();
-
-
-                convertWindow.Closing += (_s, _e) =>
+                convertWindow.Closing += (_, _) =>
                 {
                     convertWindow = null;
                 };
-              
                convertWindow.Show();
-
 
             }else
             {
@@ -59,14 +55,12 @@ namespace UtilsBox
                 imgMaskWindow = new ImgMaskWindow();
 
 
-                imgMaskWindow.Closing += (_s, _e) =>
+                imgMaskWindow.Closing += (_, _) =>
                 {
                     imgMaskWindow = null;
                 };
 
                 imgMaskWindow.Show();
-
-
             }
             else
             {
@@ -107,5 +101,7 @@ namespace UtilsBox
             IpWindow ipWindow = new IpWindow();
             ipWindow.Show();
         }
+
+      
     }
 }
