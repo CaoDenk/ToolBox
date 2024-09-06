@@ -12,9 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using UtilsBox.Handle;
+using ToolBox.Handle;
 
-namespace UtilsBox.Views
+namespace ToolBox.Views
 {
     /// <summary>
     /// IpWindow.xaml 的交互逻辑

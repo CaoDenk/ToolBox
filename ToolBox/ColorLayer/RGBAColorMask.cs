@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UtilsBox.ColorLayer
+namespace ToolBox.ColorLayer
 {
     internal class BRGAColorMask
     {

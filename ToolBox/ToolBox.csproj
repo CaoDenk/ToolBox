@@ -7,6 +7,16 @@
 	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Model\**" />
+    <Compile Remove="ViewModel\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="ViewModel\**" />
+    <None Remove="Model\**" />
+    <None Remove="ViewModel\**" />
+    <Page Remove="Model\**" />
+    <Page Remove="ViewModel\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Resources\Add.png" />
     <None Remove="Resources\Convert.png" />
     <None Remove="Resources\gongjuxiang.png" />
@@ -24,9 +34,5 @@
     <Resource Include="Resources\gongjuxiang.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
 </Project>

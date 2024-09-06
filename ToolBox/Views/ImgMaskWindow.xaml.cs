@@ -14,10 +14,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using UtilsBox.ColorLayer;
+using ToolBox.ColorLayer;
 using Path = System.IO.Path;
 using Window = System.Windows.Window;
-namespace UtilsBox.Views
+namespace ToolBox.Views
 {
     /// <summary>
     /// ImgMaskWindow.xaml 的交互逻辑

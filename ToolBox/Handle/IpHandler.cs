@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UtilsBox.Handle
+namespace ToolBox.Handle
 {
     internal class IpHandler
     {
