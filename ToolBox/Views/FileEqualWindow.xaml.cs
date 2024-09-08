@@ -200,7 +200,7 @@ namespace ToolBox.Views
             {
                 if (e.Data.GetData(DataFormats.FileDrop) is System.Array d )
                 {
-                    File1=d.GetValue(0) as string ;
+                    File1 = d.GetValue(0) as string;
                 }
             }
 

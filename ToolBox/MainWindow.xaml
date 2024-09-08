@@ -61,7 +61,18 @@
                 <TextBlock  HorizontalAlignment="Center" FontSize="14" >计算IP</TextBlock>
             </StackPanel>
         </Button>
-
+        <Button Grid.Column="0" Grid.Row="1"   Margin="3" Click="GetOnnxModelInfo">
+            <!--<Image Source=""/>-->
+            <StackPanel >
+                <TextBlock  HorizontalAlignment="Center" FontSize="14" >查看onnx模型</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="1"   Margin="3" Click="RectifyImg">
+            <!--<Image Source=""/>-->
+            <StackPanel >
+                <TextBlock  HorizontalAlignment="Center" FontSize="14" >校正图片</TextBlock>
+            </StackPanel>
+        </Button>
     </Grid>
 
 </Window>

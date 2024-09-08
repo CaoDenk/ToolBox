@@ -22,7 +22,12 @@
     <None Remove="Resources\gongjuxiang.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="OpenCvSharp4.Windows" Version="4.8.0.20230708" />
+    <PackageReference Include="libtorch-cpu-win-x64" Version="2.4.0" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.19.2" />
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.10.0.20240616" />
+    <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.10.0.20240616" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.8" />
+    <PackageReference Include="TorchSharp" Version="0.103.0" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Add.png">
@@ -34,5 +39,10 @@
     <Resource Include="Resources\gongjuxiang.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="save.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
