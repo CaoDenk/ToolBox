@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ToolBox.Handle
 {
+    /// <summary>
+    /// 力扣解析matrix 输入，在.net8之前可用，在.net8后，可解析[[]]
+    /// </summary>
     internal class ParseMatrix
     {
       
